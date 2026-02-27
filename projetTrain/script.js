@@ -1,64 +1,57 @@
-class Train{
-    constructor(speed){
-        this.table_color = [black, white, purple, green, yellow, orange, red, blue];
-        this.color = random_int(0, count(this.table_color)-1);
-        this.position = false;
-        this.speed = speed;
-        this.status = false;
-    }
-    
-    run(){
-        
+class Rail {
+    constructor(element) {
+        this.element = element;
+        this.isVertical = element.classList.contains("vertical");
     }
 
-    sens(){
-        
+    toggle() {
+        this.isVertical = !this.isVertical;
+
+        this.element.classList.toggle("vertical");
+        this.element.classList.toggle("horizontal");
     }
 }
 
-class connect{
-    constructor(touche){
-        this.enter;
-        this.exit_1;
-        this.exit_2;
-        this.touche = touche;
+class Train {
+    constructor(element) {
+        this.element = element;
     }
 
-    path(){
-        
+    changeColor() {
+        const randomColor = "#" + Math.floor(Math.random() * 16777215)
+            .toString(16)
+            .padStart(6, "0");
+
+        this.element.style.backgroundColor = randomColor;
     }
 }
-
-class House{
-    constructor(){
-        this.table_color = [black, white, purple, green, yellow, orange, red, blue];
-        this.color = random_int(0, count(this.table_color)-1);
-        this.nb_pass;
-        this.nb_total;
-        this.door;
-    }
-
-    unique(){
-        
-    }
-
-    control(train){
-        
-    }
-
-}
-
 
 document.addEventListener("DOMContentLoaded", () => {
-    const buttons = document.querySelectorAll(".circle");
 
-    buttons.forEach(button => {
-        const railId = button.dataset.rail;
-        const rail = new Rail(railId);
+    const train = new Train(document.getElementById("train"));
+
+    const rails = {};
+    document.querySelectorAll(".rail").forEach(rail => {
+        rails[rail.id] = new Rail(rail);
+    });
+
+    document.querySelectorAll(".circle").forEach(button => {
+
+        let isDown = true;
 
         button.addEventListener("click", () => {
-            rail.toggle();
-            train.spawn_random_clors_on_rail();
+
+            const img = button.querySelector("img");
+            img.src = isDown
+                ? "./ressources/up.png"
+                : "./ressources/down.png";
+
+            isDown = !isDown;
+
+            train.changeColor();
+
+            const railId = button.dataset.rail;
+            rails[railId].toggle();
         });
     });
 });

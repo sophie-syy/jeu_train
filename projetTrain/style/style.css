@@ -5,6 +5,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    font-family: sans-serif;
 }
 
 .container {
@@ -21,14 +22,11 @@ body {
     position: absolute;
 }
 
-.black { background: black; }
-.white { background: white; }
-.purple { background: purple; }
-.green { background: green; }
-.yellow { background: yellow; }
-.orange { background: orange; }
-.red { background: red; }
-.blue { background: blue; }
+.black { background: black; left: 50px; top: 150px; }
+.purple { background: purple; left: 200px; top: 70px; }
+.green { background: green; left: 300px; top: 70px; }
+.yellow { background: yellow; left: 400px; top: 70px; }
+.orange { background: orange; left: 400px; top: 230px; }
 
 .line {
     position: absolute;
@@ -36,11 +34,20 @@ body {
     transition: all 0.3s ease;
 }
 
-.horizontal { width: 280px; height: 4px; left: 90px; top: 190px; }
-.vertical { width: 4px; height: 80px; }
+.horizontal {
+    width: 450px;
+    height: 4px;
+    left: 90px;
+    top: 170px;
+}
+
+.vertical {
+    width: 4px;
+    height: 80px;
+}
 
 .v1 { left: 220px; top: 110px; }
-.v2 { left: 220px; top: 210px; }
+.v2 { left: 320px; top: 110px; }
 .v3 { left: 420px; top: 110px; }
 .v4 { left: 420px; top: 170px; }
 
@@ -49,16 +56,33 @@ body {
     height: 40px;
     border-radius: 50%;
     border: 3px solid blue;
-    color: blue;
-    font-weight: bold;
+    background: white;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    background: white;
     cursor: pointer;
+    overflow: hidden;
     user-select: none;
 }
 
-.circle1 { left: 200px; top: 170px; }
+.circle img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+    pointer-events: none;
+}
 
+.circle1 { left: 200px; top: 150px; }
+.circle2 { left: 300px; top: 150px; }
+.circle3 { left: 400px; top: 150px; }
+.circle4 { left: 500px; top: 150px; }
+
+.train {
+    width: 30px;
+    height: 30px;
+    background: red;
+    position: absolute;
+    top: 155px;
+    left: 60px;
+}
