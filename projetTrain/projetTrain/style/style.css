@@ -1,0 +1,74 @@
+body {
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    position: relative;
+    width: 700px;
+    height: 350px;
+    background-color: #eee;
+    border: 1px solid #999;
+}
+
+.square {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+}
+
+.black { background: black; left: 50px; top: 170px;}
+.white { background: white; }
+.purple { background: purple; left: 200px; top: 70px; }
+.green { background: green; left: 370px; top: 170px;}
+.yellow { background: yellow; }
+.orange { background: orange; }
+.red { background: red; }
+.blue { background: blue; }
+
+.line {
+    position: absolute;
+    background: black;
+    transition: all 0.3s ease;
+}
+
+.horizontal { width: 280px; height: 4px; left: 90px; top: 190px; }
+.vertical { width: 4px; height: 80px; }
+
+.v1 { left: 220px; top: 110px; }
+.v2 { left: 220px; top: 210px; }
+.v3 { left: 420px; top: 110px; }
+.v4 { left: 420px; top: 170px; }
+
+.circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid blue;
+    color: blue;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background: white;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+.circle:hover {
+    transform: scale(1.1);
+    background: #ddd;
+}
+
+.circle1 { left: 200px; top: 170px; }
+
+#train {
+    position: absolute;
+    z-index: 10;
+}
