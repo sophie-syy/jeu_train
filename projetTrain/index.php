@@ -15,10 +15,10 @@
     <div class="square yellow"></div>
     <div class="square orange"></div>
 
-    <div id="rail1" class="line vertical v1"></div>
-    <div id="rail2" class="line vertical v2"></div>
-    <div id="rail3" class="line vertical v3"></div>
-    <div id="rail4" class="line vertical v4"></div>
+    <div class="line vertical v1"></div>
+    <div class="line vertical v2"></div>
+    <div class="line vertical v3"></div>
+    <div class="line vertical v4"></div>
 
     <div class="line horizontal"></div>
 
