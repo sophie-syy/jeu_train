@@ -1,18 +1,17 @@
 body {
-    background-color: #ddd;
+    background: #ddd;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: sans-serif;
 }
 
 .container {
     position: relative;
     width: 700px;
     height: 350px;
-    background-color: #eee;
+    background: #eee;
     border: 1px solid #999;
 }
 
@@ -31,7 +30,7 @@ body {
 .line {
     position: absolute;
     background: black;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
 .horizontal {
@@ -63,14 +62,7 @@ body {
     position: absolute;
     cursor: pointer;
     overflow: hidden;
-    user-select: none;
-}
-
-.circle img {
-    width: 60%;
-    height: 60%;
-    object-fit: contain;
-    pointer-events: none;
+    padding: 0;
 }
 
 .circle1 { left: 200px; top: 150px; }
@@ -85,4 +77,10 @@ body {
     position: absolute;
     top: 155px;
     left: 60px;
+}
+
+.circle img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
 }
