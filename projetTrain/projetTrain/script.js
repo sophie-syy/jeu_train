@@ -3,10 +3,29 @@ class Train {
         this.table_color = ['black', 'white', 'purple', 'green', 'yellow', 'orange', 'red', 'blue'];
         this.color = this.table_color[Math.floor(Math.random() * this.table_color.length)];
         this.position = {x, y};
-        this.speed = speed;
-        this.status = false;
-        this.destination = 'right';
-        this.element = null;
+        this.speed = speed; // vitesse
+        this.status = false; // en mouvement?
+        this.sens = false; // tourner?
+        this.element = null; 
+        this.sens_rail();
+    }
+
+    sens_rail() {
+        document.querySelector(".circle").addEventListener('click', () => {
+            console.log("tourner? " + !this.sens);
+            this.sens = !this.sens;
+        });
+    }
+
+    isTrainOnButton(buttonX = 200, buttonY = 170) {
+        //Coordonnées du bouton (circle1): left: 200px; top: 170px;
+        if(this.element.style.left == buttonX + 'px' && this.element.style.top == buttonY + 'px'){
+            console.error("true");
+            return true;
+        }else{
+            return false;
+        };
+        
     }
 
     spawn() {
@@ -34,104 +53,44 @@ class Train {
 
     run() {
         if (!this.status) return;
-
-        if (this.destination === 'right') {
-            this.moveToGreen();
-        } else if (this.destination === 'left') {
-            this.moveToPurple();
+        if(this.position.x == 200 && this.sens){
+            this.moveToLeft();
+        }else{
+            this.moveToRight();
         }
+        
     }
 
-    moveToGreen() {
+    moveToRight(x = 370) {
         // Mouvement du noir (50, 170) au vert (370, 170)
-        if (this.position.x < 370) {
+        if (this.position.x < x){
             this.position.x += this.speed;
             this.element.style.left = this.position.x + 'px';
-            requestAnimationFrame(() => this.run());
-        } else {
-            this.position.x = 370;
+            console.log("x " + this.position.x);
+            requestAnimationFrame(() => this.run());  
+        } else if(this.position.x == x){
+            this.position.x = x;
             this.element.style.left = this.position.x + 'px';
-            console.log("Train arrivé au vert");
+            console.log("Train arrivé droite");
         }
     }
 
-    moveToPurple() {
+    moveToLeft(x = 200, y = 70) {
         // Mouvement du vert (370, 170) au violet (200, 70)
-        const targetX = 200;
-        const targetY = 70;
-
         // Horizontal d'abord
-        if (this.position.x > targetX) {
-            this.position.x -= this.speed;
-            this.element.style.left = this.position.x + 'px';
-            requestAnimationFrame(() => this.run());
-        }
-        // Puis vertical
-        else if (this.position.y > targetY) {
+        if (this.position.x == x && this.position.y > y) {
             this.position.y -= this.speed;
             this.element.style.top = this.position.y + 'px';
+            console.log("y " + this.position.y);
             requestAnimationFrame(() => this.run());
-        } else {
+        }
+         else {
             console.log("Train arrivé au violet");
         }
     }
 
-    changeDestination(newDestination) {
-        this.destination = newDestination;
-    }
-
-    sens() {
-        
-    }
 }
 
-class Connect {
-    constructor(boutonElement, train) {
-        this.enter = null;
-        this.exit_1 = 'right';        // Sortie normale vers le vert
-        this.exit_2 = 'left';       // Sortie alternative vers le violet
-        this.touche = boutonElement;
-        this.train = train;
-        this.isActive = false;
-        this.setupListener();
-    }
-
-    setupListener() {
-        this.touche.addEventListener('click', () => {
-            this.path();
-        });
-    }
-
-    path() {
-        // Vérifier si le train est sur le bouton (à proximité)
-        if (this.isTrainOnButton()) {
-            console.log("Train détecté sur le bouton ! Direction: " + this.exit_2);
-            this.train.changeDestination(this.exit_2);
-            this.isActive = true;
-        }
-    }
-
-    isTrainOnButton() {
-        // Coordonnées du bouton (circle1): left: 200px; top: 170px;
-        const buttonX = 200;
-        const buttonY = 170;
-        const tolerance = 50; 
-
-        const distance = Math.hypot(
-            this.train.position.x - buttonX,
-            this.train.position.y - buttonY
-        );
-
-        return distance < tolerance;
-    }
-
-    sens() {
-        if (this.isTrainOnButton()) {
-            return this.exit_2; 
-        }
-        return this.exit_1;
-    }
-}
 
 class House {
     constructor() {
@@ -151,17 +110,18 @@ class House {
     }
 }
 
-let train;
-let connect;
-
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     console.log("DOM Loaded");
     
-    // Créer et lancer la boule
-    train = new Train(1, 50, 170);
-    train.spawn();
-
-    // Créer l'objet Connect qui contrôle les interactions
-    const button = document.querySelector(".circle");
-    connect = new Connect(button, train);
+    let trains = []; // Tableau pour stocker tous les trains
+    
+    trains.push(new Train(1, 50, 170));
+    trains[0].spawn();
+    
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    trains.push(new Train(1, 50, 170));
+    trains[1].spawn();
+    
+    // Les deux trains restent maintenant
 });
