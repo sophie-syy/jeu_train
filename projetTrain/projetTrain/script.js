@@ -110,18 +110,12 @@ class House {
     }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
+
+let train;
+
+document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM Loaded");
     
-    let trains = []; // Tableau pour stocker tous les trains
-    
-    trains.push(new Train(1, 50, 170));
-    trains[0].spawn();
-    
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    trains.push(new Train(1, 50, 170));
-    trains[1].spawn();
-    
-    // Les deux trains restent maintenant
-});
+    train = new Train(1, 50, 170);
+    train.spawn();
+}); 
