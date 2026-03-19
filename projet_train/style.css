@@ -1,0 +1,244 @@
+button { 
+    all: unset; 
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1a1a2e;
+    height: 100vh;
+    font-family: 'Press Start 2P', monospace;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: min(95vw, 160vh);
+    aspect-ratio: 16/9;
+    background: #2a8038;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Rails */
+.rail {
+    position: absolute;
+    background: linear-gradient(90deg, #7f8c8d, #bdc3c7, #7f8c8d);
+}
+
+/* UI */
+.ui {
+    position: absolute;
+    top: 2%; left: 2%;
+    color: white;
+    align-items: center;
+    font-size: 1.8vmin;
+    z-index: 30;
+    display: flex;
+    gap: 0.8vmin;
+}
+.score-display {
+    background: rgba(0,0,0,0.6);
+    padding: 0.8vmin 1.5vmin;
+    border-radius: 4px;
+    border: 1px solid #e94560;
+    color: #e94560;
+}
+.timer-display {
+    background: rgba(0,0,0,0.6);
+    padding: 0.8vmin 1.5vmin;
+    border-radius: 4px;
+    border: 1px solid #f1c40f;
+    color: #f1c40f;
+}
+.timer-display.urgent {
+    border-color: #e74c3c;
+    color: #e74c3c;
+    animation: blink 0.5s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+/* Overlay */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    gap: 3vmin;
+    backdrop-filter: blur(4px);
+}
+.overlay h2 {
+    font-size: 5vmin;
+    color: #e94560;
+    text-shadow: 0 0 20px rgba(233,69,96,0.8);
+    animation: pulse 0.8s infinite alternate;
+}
+.overlay.win h2 { color: #2ecc71; text-shadow: 0 0 20px rgba(46,204,113,0.8); }
+.overlay p { font-size: 2.5vmin; color: white; }
+.overlay button {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 2vmin;
+    padding: 1.5vmin 3vmin;
+    background: #e94560;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.overlay button:hover { transform: scale(1.05); background: #c0392b; }
+@keyframes pulse { from{transform:scale(1)} to{transform:scale(1.05)} }
+
+/* Particles */
+.particle {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+    animation: float-up 0.8s ease-out forwards;
+    z-index: 50;
+}
+@keyframes float-up {
+    0%   { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-8vmin) scale(0); opacity: 0; }
+}
+
+/* Speed */
+.speed-bar {
+    position: absolute;
+    bottom: 2%; right: 2%;
+    display: flex;
+    align-items: center;
+    gap: 1vmin;
+    z-index: 30;
+}
+.speed-label { color: rgba(255,255,255,0.5); font-size: 1.2vmin; }
+.speed-track {
+    width: 10vmin; height: 1vmin;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+.speed-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2ecc71, #e74c3c);
+    border-radius: 2px;
+    transition: width 0.5s;
+}
+
+/* Pause btn */
+.pause-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.5vmin;
+    padding: 0.8vmin 1.5vmin;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: 1px solid white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.pause-btn:hover { background: rgba(255,255,255,0.2); }
+
+/* ── Pause menu (sert aussi d'écran de démarrage) ── */
+.pause-menu {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3vmin;
+    z-index: 200;
+    backdrop-filter: blur(4px);
+}
+.pause-menu.visible { display: flex; }
+
+.pause-menu h2 {
+    font-size: 5vmin;
+    color: white;
+    letter-spacing: 0.2em;
+}
+
+/* Sous-titre niveau affiché en pause */
+.pause-menu .pause-level {
+    font-size: 1.4vmin;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.15em;
+}
+
+/* Boutons d'action (reprendre) */
+.pause-menu .pause-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vmin;
+}
+
+.pause-menu button {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 2vmin;
+    padding: 1.5vmin 3vmin;
+    background: #e94560;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.pause-menu .btn-resume:hover { background: #c0392b; transform: scale(1.05); }
+
+/* Séparateur */
+.pause-menu .divider {
+    font-size: 1.2vmin;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.3em;
+}
+
+/* Boutons de niveau */
+.pause-menu .level-buttons {
+    display: flex;
+    gap: 2.5vmin;
+}
+
+.pause-menu .level-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.6vmin;
+    padding: 1.5vmin 2.5vmin;
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, color 0.2s;
+}
+.pause-menu .level-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--c);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.pause-menu .level-btn:hover::before { opacity: 0.15; }
+.pause-menu .level-btn:hover { border-color: var(--c); color: var(--c); }
+.pause-menu .level-btn.n1 { --c: #2ecc71; }
+.pause-menu .level-btn.n2 { --c: #3498db; }
+.pause-menu .level-btn.n3 { --c: #e94560; }
+.pause-menu .level-btn .diff {
+    display: block;
+    font-size: 0.9vmin;
+    color: rgba(255,255,255,0.35);
+    margin-top: 0.8vmin;
+    text-align: center;
+}
+.pause-menu button:hover { background: #c0392b; transform: scale(1.05); }

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Train Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<div class="container" id="gameContainer">
+
+    <!-- Rails -->
+    <div class="ties"></div>
+    <div class="rail" id="v1"></div>
+    <div class="rail" id="v2"></div>
+    <div class="rail" id="v3"></div>
+    <div class="rail" id="v4"></div>
+    <div class="rail" id="v5"></div>
+    <div class="rail" id="v6"></div>
+    <div class="rail" id="v7"></div>
+    <div class="rail" id="v8"></div>
+    <div class="rail" id="v9"></div>
+    <div class="rail" id="v10"></div>
+    <div class="rail" id="v11"></div>
+    <div class="rail" id="v12"></div>
+
+    <!-- Aiguillages -->
+    <button id="sw1"></button>
+    <button id="sw2"></button>
+    <button id="sw3"></button>
+    <button id="sw4"></button>
+    <button id="sw5"></button>
+    <button id="sw6"></button>
+    <button id="sw7"></button>
+    <button id="sw8"></button>
+    <button id="sw9"></button>
+    <button id="sw10"></button>
+    <button id="sw11"></button>
+
+    <!-- Maisons -->
+    <div id="black"></div>
+    <div id="purple"></div>
+    <div id="green"></div>
+    <div id="yellow"></div>
+    <div id="orange"></div>
+    <div id="white"></div>
+    <div id="red"></div>
+    <div id="blue"></div>
+    <div id="pink"></div>
+    <div id="blueviolet"></div>
+    <div id="maroon"></div>
+    <div id="cyan"></div>
+    <div id="bisque"></div>
+
+    <!-- UI -->
+    <div class="ui">
+        <button class="pause-btn" id="pauseBtn">⏸</button>
+        <div class="timer-display" id="timerDisplay">⏱ 2:00</div>
+        <div class="score-display" id="scoreDisplay">CORECT: 0 / 0</div>
+    </div>
+
+    <!-- Pause menu — visible au démarrage -->
+    <div class="pause-menu visible" id="pauseMenu">
+        <h2 id="pauseTitle">TRAIN GAME</h2>
+        <button id="resumeBtn" style="display:none">▶ REPRENDRE</button>
+        <div class="divider">── NIVEAU ──</div>
+        <div class="level-buttons">
+            <button class="level-btn n1" onclick="setLevel(1)">
+                NIVEAU 1
+                <span class="diff">FACILE</span>
+            </button>
+            <button class="level-btn n2" onclick="setLevel(2)">
+                NIVEAU 2
+                <span class="diff">MOYEN</span>
+            </button>
+            <button class="level-btn n3" onclick="setLevel(3)">
+                NIVEAU 3
+                <span class="diff">DIFFICILE</span>
+            </button>
+        </div>
+    </div>
+
+</div>
+<script src="carte_L1.js"></script>
+<script src="carte_L2.js"></script>
+<script src="carte_L3.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
