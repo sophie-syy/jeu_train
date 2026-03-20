@@ -121,16 +121,6 @@ class Switch {
         if (span) span.textContent = this.arrows[this.state];
     }
 
-    reset() {
-        this.dirIndex = 0;
-        this.state    = this.allowed[0];
-        this._updateDisplay();
-    }
-
-    removeListeners() {
-        if (this.el && this._handler)
-            this.el.removeEventListener('click', this._handler);
-    }
 }
 
 class Train {
@@ -142,7 +132,6 @@ class Train {
         this.speed     = 0.12;
         this.active    = true;
         this._lastSw   = null;
-        //this.house = table.house; pas besoin 
 
         this.pendingDirection  = null;
         this.directionDelay    = 0;
@@ -477,6 +466,3 @@ class Game {
         this.animId = requestAnimationFrame(() => this.loop());
     }
 }
-
-//const game = new Game(); pas besoin
-//game.start(); pas besoin
